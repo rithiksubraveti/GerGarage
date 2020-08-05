@@ -1,0 +1,127 @@
+﻿@model GerGarage.Models.CustomerAppointment
+
+@{
+    ViewBag.Title = "Booking";
+}
+
+<h2>Booking</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>CustomerAppointment</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.BookingDate, "Booking Date", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.BookingDate, new { @readonly = "readonly", @Value = @DateTime.Now.ToString("yyyy-MM-dd") })
+            @Html.ValidationMessageFor(model => model.BookingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustomerName, "Full Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CustomerEmail, "Email Id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CustomerEmail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CustomerEmail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.VehicleMake, "Car Company", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.VehicleMake, ViewBag.VehicleList as SelectList, "Please select your car ", new { @class = "form-control" })
+           
+          @*@Html.DropDownList("VehicleBrand", (IEnumerable<SelectListItem>)ViewBag.VehicleList, "Please select your car")
+            @Html.DropDownList("VehicleList1", ViewBag.vehiclelist as SelectList, "Select a car brand")
+                @Html.DropDownList("VehicleMakes", "Select your car brand")*@
+            @Html.ValidationMessageFor(model => model.VehicleMake, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+        <div class="form-group">
+            @Html.LabelFor(model => model.VehicleModel, "Car Model Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.VehicleModel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VehicleModel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServiceType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ServiceType, ViewBag.ServiceList as SelectList, "Please select type of service you are looking for ", new { @class = "form-control" })
+                @*Html.DropDownList("ServiceName", (IEnumerable<SelectListItem>)ViewBag.ServiceList, "Please select the service")
+                @* @Html.DropDownList("ServicesAvailables","Select a service")
+                    @Html.DropDownList("ServiceList1", ViewBag.servicelist as SelectList, "Select a car brand")*@
+                Not Sure?Click here....@Html.ActionLink("Services", "About", "Home")
+
+                @Html.ValidationMessageFor(model => model.ServiceType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ServiceDate, "Service Date", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ServiceDate, new { htmlAttributes = new { @class = "servicedate" } })
+                <span class="glyphicon glyphicon-calendar"></span>
+                @Html.ValidationMessageFor(model => model.ServiceDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remarks, "Remarks/Message", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div>@ViewData["Confirmed"]</div>
+                <input type="submit" value="Confirm Booking" class="btn btn-default" />
+            </div>
+        </div>
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $(function () {
+        $(".servicedate").datepicker({
+            dateFormat: "yy-mm-dd",
+            minDate: 0,// makes past dates from calender disabled
+            beforeShowDay: disableSunday
+        });
+        // Function for disabling selection of Sundays from the calender
+        function disableSunday(sunday) {
+           var calenderday = sunday.getDay();
+            return [(calenderday > 0)];
+        };
+        
+    });
+     
+    </script>
+}

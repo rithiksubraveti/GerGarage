@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GerGarageDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookingStatusTable">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingStatus" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerBooking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VehicleMake" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VehicleModel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceDate" Type="date" Nullable="false" />
+          <Property Name="Remarks" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CustomerLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerEmailId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerPassword" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerRegistry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerLastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerContact" Type="bigint" />
+          <Property Name="CustomerEmailId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerPostalCode" Type="varchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeEmailId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeePassword" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeRegistry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeFirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeLastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeContact" Type="bigint" Nullable="false" />
+          <Property Name="EmployeeEmailId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeePassword" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JobCardDetails">
+          <Key>
+            <PropertyRef Name="JobNumber" />
+          </Key>
+          <Property Name="JobNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingId" Type="int" Nullable="false" />
+          <Property Name="ServiceDate" Type="date" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarMake" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarModel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="MechanicAssigned" Type="varchar" MaxLength="50" />
+          <Property Name="JobStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ServicesAvailable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleMake">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleBrand" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EmployeeRole_EmployeeRegistry">
+          <End Role="EmployeeRegistry" Type="Self.EmployeeRegistry" Multiplicity="1" />
+          <End Role="EmployeeRole" Type="Self.EmployeeRole" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRegistry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeRole">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCardDetails_CustomerBooking">
+          <End Role="CustomerBooking" Type="Self.CustomerBooking" Multiplicity="1" />
+          <End Role="JobCardDetails" Type="Self.JobCardDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerBooking">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="JobCardDetails">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GerGarageDbModelStoreContainer">
+          <EntitySet Name="BookingStatusTable" EntityType="Self.BookingStatusTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerBooking" EntityType="Self.CustomerBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerLogin" EntityType="Self.CustomerLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerRegistry" EntityType="Self.CustomerRegistry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeLogin" EntityType="Self.EmployeeLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeRegistry" EntityType="Self.EmployeeRegistry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobCardDetails" EntityType="Self.JobCardDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicesAvailable" EntityType="Self.ServicesAvailable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleMake" EntityType="Self.VehicleMake" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmployeeRole_EmployeeRegistry" Association="Self.FK_EmployeeRole_EmployeeRegistry">
+            <End Role="EmployeeRegistry" EntitySet="EmployeeRegistry" />
+            <End Role="EmployeeRole" EntitySet="EmployeeRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCardDetails_CustomerBooking" Association="Self.FK_JobCardDetails_CustomerBooking">
+            <End Role="CustomerBooking" EntitySet="CustomerBooking" />
+            <End Role="JobCardDetails" EntitySet="JobCardDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GerGarageDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CustomerLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerEmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerRegistry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerContact" Type="Int64" />
+          <Property Name="CustomerEmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerPostalCode" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeEmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeRegistry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeContact" Type="Int64" Nullable="false" />
+          <Property Name="EmployeeEmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeePassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EmployeeRole" Relationship="GerGarageDbModel.FK_EmployeeRole_EmployeeRegistry" FromRole="EmployeeRegistry" ToRole="EmployeeRole" />
+        </EntityType>
+        <EntityContainer Name="GerGarageDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerLogins" EntityType="Self.CustomerLogin" />
+          <EntitySet Name="CustomerRegistries" EntityType="Self.CustomerRegistry" />
+          <EntitySet Name="EmployeeLogins" EntityType="Self.EmployeeLogin" />
+          <EntitySet Name="EmployeeRegistries" EntityType="Self.EmployeeRegistry" />
+          <EntitySet Name="EmployeeRoles" EntityType="GerGarageDbModel.EmployeeRole" />
+          <AssociationSet Name="FK_EmployeeRole_EmployeeRegistry" Association="GerGarageDbModel.FK_EmployeeRole_EmployeeRegistry">
+            <End Role="EmployeeRegistry" EntitySet="EmployeeRegistries" />
+            <End Role="EmployeeRole" EntitySet="EmployeeRoles" />
+          </AssociationSet>
+          <EntitySet Name="CustomerBookings" EntityType="GerGarageDbModel.CustomerBooking" />
+          <EntitySet Name="VehicleMakes" EntityType="GerGarageDbModel.VehicleMake" />
+          <EntitySet Name="ServicesAvailables" EntityType="GerGarageDbModel.ServicesAvailable" />
+          <EntitySet Name="BookingStatusTables" EntityType="GerGarageDbModel.BookingStatusTable" />
+          <EntitySet Name="JobCardDetails" EntityType="GerGarageDbModel.JobCardDetail" />
+          <AssociationSet Name="FK_JobCardDetails_CustomerBooking" Association="GerGarageDbModel.FK_JobCardDetails_CustomerBooking">
+            <End Role="CustomerBooking" EntitySet="CustomerBookings" />
+            <End Role="JobCardDetail" EntitySet="JobCardDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="EmployeeRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EmployeeRegistry" Relationship="GerGarageDbModel.FK_EmployeeRole_EmployeeRegistry" FromRole="EmployeeRole" ToRole="EmployeeRegistry" />
+        </EntityType>
+        <Association Name="FK_EmployeeRole_EmployeeRegistry">
+          <End Type="GerGarageDbModel.EmployeeRegistry" Role="EmployeeRegistry" Multiplicity="1" />
+          <End Type="GerGarageDbModel.EmployeeRole" Role="EmployeeRole" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRegistry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeRole">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CustomerBooking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="JobCardDetails" Relationship="GerGarageDbModel.FK_JobCardDetails_CustomerBooking" FromRole="CustomerBooking" ToRole="JobCardDetail" />
+        </EntityType>
+        <EntityType Name="VehicleMake">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleBrand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ServicesAvailable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="BookingStatusTable">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingStatus" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JobCardDetail">
+          <Key>
+            <PropertyRef Name="JobNumber" />
+          </Key>
+          <Property Name="JobNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="MechanicAssigned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerBooking" Relationship="GerGarageDbModel.FK_JobCardDetails_CustomerBooking" FromRole="JobCardDetail" ToRole="CustomerBooking" />
+        </EntityType>
+        <Association Name="FK_JobCardDetails_CustomerBooking">
+          <End Type="GerGarageDbModel.CustomerBooking" Role="CustomerBooking" Multiplicity="1" />
+          <End Type="GerGarageDbModel.JobCardDetail" Role="JobCardDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerBooking">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="JobCardDetail">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GerGarageDbModelStoreContainer" CdmEntityContainer="GerGarageDbEntities">
+          <EntitySetMapping Name="CustomerLogins">
+            <EntityTypeMapping TypeName="GerGarageDbModel.CustomerLogin">
+              <MappingFragment StoreEntitySet="CustomerLogin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerEmailId" ColumnName="CustomerEmailId" />
+                <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerRegistries">
+            <EntityTypeMapping TypeName="GerGarageDbModel.CustomerRegistry">
+              <MappingFragment StoreEntitySet="CustomerRegistry">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerFirstName" ColumnName="CustomerFirstName" />
+                <ScalarProperty Name="CustomerLastName" ColumnName="CustomerLastName" />
+                <ScalarProperty Name="CustomerContact" ColumnName="CustomerContact" />
+                <ScalarProperty Name="CustomerEmailId" ColumnName="CustomerEmailId" />
+                <ScalarProperty Name="CustomerPassword" ColumnName="CustomerPassword" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerPostalCode" ColumnName="CustomerPostalCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeLogins">
+            <EntityTypeMapping TypeName="GerGarageDbModel.EmployeeLogin">
+              <MappingFragment StoreEntitySet="EmployeeLogin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeEmailId" ColumnName="EmployeeEmailId" />
+                <ScalarProperty Name="EmployeePassword" ColumnName="EmployeePassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeRegistries">
+            <EntityTypeMapping TypeName="GerGarageDbModel.EmployeeRegistry">
+              <MappingFragment StoreEntitySet="EmployeeRegistry">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+                <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+                <ScalarProperty Name="EmployeeContact" ColumnName="EmployeeContact" />
+                <ScalarProperty Name="EmployeeEmailId" ColumnName="EmployeeEmailId" />
+                <ScalarProperty Name="EmployeePassword" ColumnName="EmployeePassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeRoles">
+            <EntityTypeMapping TypeName="GerGarageDbModel.EmployeeRole">
+              <MappingFragment StoreEntitySet="EmployeeRole">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerBookings">
+            <EntityTypeMapping TypeName="GerGarageDbModel.CustomerBooking">
+              <MappingFragment StoreEntitySet="CustomerBooking">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ServiceDate" ColumnName="ServiceDate" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="VehicleModel" ColumnName="VehicleModel" />
+                <ScalarProperty Name="VehicleMake" ColumnName="VehicleMake" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleMakes">
+            <EntityTypeMapping TypeName="GerGarageDbModel.VehicleMake">
+              <MappingFragment StoreEntitySet="VehicleMake">
+                <ScalarProperty Name="VehicleBrand" ColumnName="VehicleBrand" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicesAvailables">
+            <EntityTypeMapping TypeName="GerGarageDbModel.ServicesAvailable">
+              <MappingFragment StoreEntitySet="ServicesAvailable">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingStatusTables">
+            <EntityTypeMapping TypeName="GerGarageDbModel.BookingStatusTable">
+              <MappingFragment StoreEntitySet="BookingStatusTable">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobCardDetails">
+            <EntityTypeMapping TypeName="GerGarageDbModel.JobCardDetail">
+              <MappingFragment StoreEntitySet="JobCardDetails">
+                <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
+                <ScalarProperty Name="MechanicAssigned" ColumnName="MechanicAssigned" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="ServiceDate" ColumnName="ServiceDate" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="JobNumber" ColumnName="JobNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

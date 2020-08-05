@@ -1,0 +1,58 @@
+﻿@model GerGarage.Models.EmployeeRegistry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmployeeRegistry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeContact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeEmailId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeEmailId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeePassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeePassword)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,153 @@
+﻿using GerGarage.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Security;
+
+namespace GerGarage.Controllers
+{
+    public class UserController : Controller
+    {
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(RegisteredUser regUser)
+        {
+            using (var context = new GerGarageDbEntities())
+            {
+                bool isValid = context.CustomerLogins.Any(x => x.CustomerEmailId == regUser.CustomerEmailId && x.CustomerPassword == regUser.CustomerPassword);
+                if (isValid)
+                {
+                    FormsAuthentication.SetAuthCookie(regUser.CustomerEmailId, false);
+                    return RedirectToAction("Index", "Home");
+
+                }
+                ModelState.AddModelError("", "Invalid Employee Credentials!!!!");
+            }
+            return View();
+        }
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SignUp(UserRegisterView regUser)
+        {
+            using (GerGarageDbEntities db = new GerGarageDbEntities())
+            {
+                CustomerRegistry user = new CustomerRegistry();
+
+                user.CustomerFirstName = regUser.CustomerFirstName;
+                user.CustomerLastName = regUser.CustomerLastName;
+                user.CustomerContact = regUser.CustomerContact;
+                user.CustomerEmailId = regUser.CustomerEmailId;
+                user.CustomerPassword = regUser.CustomerPassword;
+                user.CustomerAddress = regUser.CustomerAddress;
+                user.CustomerPostalCode = regUser.CustomerPostalCode;
+
+                db.CustomerRegistries.Add(user);
+                db.SaveChanges();
+
+                CustomerLogin logUser = new CustomerLogin();
+                logUser.CustomerEmailId = regUser.CustomerEmailId;
+                logUser.CustomerPassword = regUser.CustomerPassword;
+                db.CustomerLogins.Add(logUser);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Login");
+
+        }
+        /*The following code is to fetch data from the Vehicle Type DB and populate them in the Drop Down List*/
+        public List<VehicleMake> GetVehicleMakes()
+        {
+            GerGarageDbEntities db = new GerGarageDbEntities();
+            List<VehicleMake> vehicleMakes = db.VehicleMakes.ToList();
+            return vehicleMakes;
+               
+        }
+        public List<ServicesAvailable> GetServicesAvailables()
+        {
+            GerGarageDbEntities db = new GerGarageDbEntities();
+            List<ServicesAvailable> servicesAvailables = db.ServicesAvailables.ToList();
+            return servicesAvailables;
+
+        }
+        [Authorize]
+        public ActionResult Booking()
+        {
+            try
+            {
+                GerGarageDbEntities db = new GerGarageDbEntities();
+
+               var VehicleList = new SelectList(db.VehicleMakes, "VehicleBrand", "VehicleBrand");
+                ViewBag.VehicleList = VehicleList;
+                /*ViewBag.VehicleList = new SelectList(GetVehicleMakes(),"VehicleBrand","VehicleBrand");*/
+                ViewBag.ServiceList = new SelectList(db.ServicesAvailables, "ServiceName", "ServiceName");
+                /*  ViewBag.ServiceList = new SelectList(GetServicesAvailables(), "ServiceName","ServiceName");*/
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Booking(CustomerAppointment custBooking)
+        {
+                using (GerGarageDbEntities db = new GerGarageDbEntities())
+                {
+                var VehicleList = new SelectList(db.VehicleMakes, "VehicleBrand", "VehicleBrand");
+                ViewBag.VehicleList = VehicleList;
+
+                try
+                    {
+                   
+                    CustomerBooking booking = new CustomerBooking();
+
+                        JobCardDetail jobCard = new JobCardDetail();
+
+                        jobCard.BookingId = custBooking.BookingId;
+                        booking.BookingDate = custBooking.BookingDate;
+                        booking.CustomerName = custBooking.CustomerName;
+                        jobCard.CustomerName = custBooking.CustomerName;
+                        booking.CustomerEmail = custBooking.CustomerEmail;
+                        booking.VehicleMake = custBooking.VehicleMake;
+                        jobCard.CarMake = custBooking.VehicleMake;
+                        booking.VehicleModel = custBooking.VehicleModel;
+                        jobCard.CarModel = custBooking.VehicleModel;
+                        booking.ServiceType = custBooking.ServiceType;
+                        jobCard.ServiceType = custBooking.ServiceType;
+                        booking.ServiceDate = custBooking.ServiceDate;
+                        jobCard.ServiceDate = custBooking.ServiceDate;
+                        booking.Remarks = custBooking.Remarks;
+
+                        db.CustomerBookings.Add(booking);
+                        db.JobCardDetails.Add(jobCard);
+                        db.SaveChanges();
+                    }
+                catch (Exception ex)
+                {
+                    return View("Error");
+                }
+                ViewData["Confirmed"] = "Your Booking was succesfull";
+                    return View();
+                }
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home", new { area = "" });
+        }
+        
+
+        
+
+
+    }
+}
