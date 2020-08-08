@@ -16,10 +16,43 @@ namespace GerGarage.Controllers
         private GerGarageDbEntities db = new GerGarageDbEntities();
 
         // GET: ManageBookings
-        public ActionResult Index()
+        public ActionResult Index(string Sorting_Order, string Search_Data)
         {
-            var jobCardDetails = db.JobCardDetails.Include(j => j.CustomerBooking);
+            ViewBag.Jobid = String.IsNullOrEmpty(Sorting_Order) ? "Job_id" : "";
+            ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
+            ViewBag.SortingStatus = String.IsNullOrEmpty(Sorting_Order) ? "Status_Description" : "";
+            ViewBag.CarModel = String.IsNullOrEmpty(Sorting_Order) ? "Car_Model" : "";
+            ViewBag.SortingDate = Sorting_Order == "Service_Date" ? "Date_Description" : "Date";
+            var jobCardDetails = from jd in db.JobCardDetails select jd;
+            {
+                if (!String.IsNullOrEmpty(Search_Data))
+                {
+                    jobCardDetails = jobCardDetails.Where(jd => jd.CustomerName.Contains(Search_Data));
+                }
+            }
+            switch (Sorting_Order)
+            {
+                case "Job_id":
+                    jobCardDetails = jobCardDetails.OrderBy(jd => jd.JobNumber);
+                    break;
+                case "Service_Date":
+                    jobCardDetails = jobCardDetails.OrderBy(jd => jd.ServiceDate);
+                    break;
+                case "Date_Description":
+                    jobCardDetails = jobCardDetails.OrderByDescending(jd => jd.ServiceDate);
+                    break;
+                case "Status_Description":
+                    jobCardDetails = jobCardDetails.OrderBy(jd => jd.JobStatus);
+                    break;
+                case "Car_Model":
+                    jobCardDetails = jobCardDetails.OrderBy(jd => jd.CarMake);
+                    break;
+                default:
+                    jobCardDetails = jobCardDetails.OrderBy(jd => jd.ServiceDate);
+                    break;
+            }
             return View(jobCardDetails.ToList());
+
         }
 
         // GET: ManageBookings/Details/5
@@ -38,7 +71,7 @@ namespace GerGarage.Controllers
         }
 
         // GET: ManageBookings/Create
-        public ActionResult Create()
+       /* public ActionResult Create()
         {
             ViewBag.BookingId = new SelectList(db.CustomerBookings, "BookingId", "CustomerName");
             return View();
@@ -60,7 +93,7 @@ namespace GerGarage.Controllers
 
             ViewBag.BookingId = new SelectList(db.CustomerBookings, "BookingId", "CustomerName", jobCardDetail.BookingId);
             return View(jobCardDetail);
-        }
+        }*/
         public List<EmployeeRegistry> GetEmployees()
         {
             GerGarageDbEntities db = new GerGarageDbEntities();
@@ -96,8 +129,6 @@ namespace GerGarage.Controllers
         }
 
         // POST: ManageBookings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "JobNumber,BookingId,ServiceDate,CustomerName,CarMake,CarModel,ServiceType,Rate,MechanicAssigned,JobStatus")] JobCardDetail jobCardDetail)
@@ -112,7 +143,7 @@ namespace GerGarage.Controllers
             return View(jobCardDetail);
         }
 
-        // GET: ManageBookings/Delete/5
+   /*     // GET: ManageBookings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,7 +167,7 @@ namespace GerGarage.Controllers
             db.JobCardDetails.Remove(jobCardDetail);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

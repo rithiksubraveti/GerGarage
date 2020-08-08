@@ -25,10 +25,8 @@ namespace GerGarage.Models
         public string ServiceType { get; set; }
         public DateTime ServiceDate { get; set; }
         public string Remarks { get; set; }
-      
-        public IEnumerable<SelectListItem> VehicleList { get; set; }
-        public IEnumerable<SelectListItem> ServiceList { get; set; }
 
+   
 
     }
 }

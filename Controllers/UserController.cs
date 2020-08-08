@@ -11,6 +11,8 @@ namespace GerGarage.Controllers
 {
     public class UserController : Controller
     {
+        private object form;
+
         public ActionResult Login()
         {
             return View();
@@ -68,7 +70,7 @@ namespace GerGarage.Controllers
             GerGarageDbEntities db = new GerGarageDbEntities();
             List<VehicleMake> vehicleMakes = db.VehicleMakes.ToList();
             return vehicleMakes;
-               
+
         }
         public List<ServicesAvailable> GetServicesAvailables()
         {
@@ -80,73 +82,62 @@ namespace GerGarage.Controllers
         [Authorize]
         public ActionResult Booking()
         {
-            try
-            {
+            
                 GerGarageDbEntities db = new GerGarageDbEntities();
 
-               var VehicleList = new SelectList(db.VehicleMakes, "VehicleBrand", "VehicleBrand");
-                ViewBag.VehicleList = VehicleList;
+                ViewBag.VehicleList = new SelectList(db.VehicleMakes, "VehicleBrand", "VehicleBrand");
+                /* ViewBag.VehicleList = VehicleList;*/
                 /*ViewBag.VehicleList = new SelectList(GetVehicleMakes(),"VehicleBrand","VehicleBrand");*/
                 ViewBag.ServiceList = new SelectList(db.ServicesAvailables, "ServiceName", "ServiceName");
                 /*  ViewBag.ServiceList = new SelectList(GetServicesAvailables(), "ServiceName","ServiceName");*/
-            }
-            catch (Exception ex)
-            {
-                return View("Error");
-            }
+            
+            
             return View();
         }
         [HttpPost]
         public ActionResult Booking(CustomerAppointment custBooking)
         {
-                using (GerGarageDbEntities db = new GerGarageDbEntities())
-                {
-                var VehicleList = new SelectList(db.VehicleMakes, "VehicleBrand", "VehicleBrand");
-                ViewBag.VehicleList = VehicleList;
+            using (GerGarageDbEntities db = new GerGarageDbEntities())
+            {
 
-                try
-                    {
-                   
-                    CustomerBooking booking = new CustomerBooking();
 
-                        JobCardDetail jobCard = new JobCardDetail();
+                CustomerBooking booking = new CustomerBooking();
 
-                        jobCard.BookingId = custBooking.BookingId;
-                        booking.BookingDate = custBooking.BookingDate;
-                        booking.CustomerName = custBooking.CustomerName;
-                        jobCard.CustomerName = custBooking.CustomerName;
-                        booking.CustomerEmail = custBooking.CustomerEmail;
-                        booking.VehicleMake = custBooking.VehicleMake;
-                        jobCard.CarMake = custBooking.VehicleMake;
-                        booking.VehicleModel = custBooking.VehicleModel;
-                        jobCard.CarModel = custBooking.VehicleModel;
-                        booking.ServiceType = custBooking.ServiceType;
-                        jobCard.ServiceType = custBooking.ServiceType;
-                        booking.ServiceDate = custBooking.ServiceDate;
-                        jobCard.ServiceDate = custBooking.ServiceDate;
-                        booking.Remarks = custBooking.Remarks;
+                JobCardDetail jobCard = new JobCardDetail();
 
-                        db.CustomerBookings.Add(booking);
-                        db.JobCardDetails.Add(jobCard);
-                        db.SaveChanges();
-                    }
-                catch (Exception ex)
-                {
-                    return View("Error");
-                }
-                ViewData["Confirmed"] = "Your Booking was succesfull";
-                    return View();
-                }
-        }
+                jobCard.BookingId = custBooking.BookingId;
+                booking.BookingDate = custBooking.BookingDate;
+                booking.CustomerName = custBooking.CustomerName;
+                jobCard.CustomerName = custBooking.CustomerName;
+                booking.CustomerEmail = custBooking.CustomerEmail;
+                booking.VehicleMake = custBooking.VehicleMake;
+                jobCard.CarMake = custBooking.VehicleMake;
+                booking.VehicleModel = custBooking.VehicleModel;
+                jobCard.CarModel = custBooking.VehicleModel;
+                booking.ServiceType = custBooking.ServiceType;
+                jobCard.ServiceType = custBooking.ServiceType;
+                booking.ServiceDate = custBooking.ServiceDate;
+                jobCard.ServiceDate = custBooking.ServiceDate;
+                booking.Remarks = custBooking.Remarks;
 
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home", new { area = "" });
-        }
+                db.CustomerBookings.Add(booking);
+                db.JobCardDetails.Add(jobCard);
+                db.SaveChanges();
+            }
+
+            ViewData["Confirmed"] = "Your Booking was succesfull";
+            return RedirectToAction("Booking");
         
+    }
 
-        
+    public ActionResult Logout()
+    {
+        FormsAuthentication.SignOut();
+        return RedirectToAction("Index", "Home", new { area = "" });
+    }
+
+
+
 
 
     }
