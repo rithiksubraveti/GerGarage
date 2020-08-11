@@ -282,6 +282,10 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="ClassDiagram1.cd" />
+    <None Include="Properties\PublishProfiles\gergarage - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gergarage - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\gergarage - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

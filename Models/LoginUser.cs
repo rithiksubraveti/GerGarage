@@ -10,7 +10,11 @@ namespace GerGarage.Models
     {
         [Key]
         public int Id { get; set; }
+
+       
         public string CustomerEmailId { get; set; }
+
+   
         public string CustomerPassword { get; set; }
     }
 }

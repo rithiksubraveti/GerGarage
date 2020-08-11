@@ -1,0 +1,64 @@
+﻿@model IEnumerable<GerGarage.Models.JobCardDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    Find by name: @Html.TextBox("Search_Data",ViewBag.FilterValue as string)
+    <input type="submit" value="Search" />
+</p>
+<table class="table">
+    <tr>
+        <th> @Html.ActionLink("Job Number", "Index", new { Sorting_Order = ViewBag.Jobid })</th>
+        <th> @Html.ActionLink("Service Date", "Index", new { Sorting_Order = ViewBag.SortingDate })</th>
+        <th> @Html.ActionLink("Customer Name", "Index", new { Sorting_Order = ViewBag.SortingName })</th>
+        <th> @Html.ActionLink("Car Brand", "Index", new { Sorting_Order = ViewBag.CarModel })</th>
+        <th>Car Model</th>
+        <th>Service Type</th>
+        <th>Rate</th>
+        <th>Mechanic Assigned</th>
+        <th> @Html.ActionLink("Status", "Index", new { Sorting_Order = ViewBag.SortingStatus })</th>
+    </tr>
+            
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.JobNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ServiceDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CustomerName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CarMake)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CarModel)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ServiceType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Rate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MechanicAssigned)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.JobStatus)
+    </td>
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.JobNumber }) |
+        @Html.ActionLink("Print Invoice", "GenerateInvoice", new { id = item.JobNumber }) |
+    </td>
+</tr>
+}
+
+</table>

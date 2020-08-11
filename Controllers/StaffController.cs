@@ -28,7 +28,7 @@ namespace GerGarage.Controllers
                     return RedirectToAction("Index", "Home");
 
                 }
-                ModelState.AddModelError("", "Invalid Employee Credentials!!!!");
+                ModelState.AddModelError("", "Invalid Login Credentials!!!!");
             }
             return View();
         }

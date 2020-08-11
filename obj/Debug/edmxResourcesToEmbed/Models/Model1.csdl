@@ -135,6 +135,7 @@
     <Property Name="MechanicAssigned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="JobStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CustomerBooking" Relationship="GerGarageDbModel.FK_JobCardDetails_CustomerBooking" FromRole="JobCardDetail" ToRole="CustomerBooking" />
+    <Property Name="CustomerMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_JobCardDetails_CustomerBooking">
     <End Type="GerGarageDbModel.CustomerBooking" Role="CustomerBooking" Multiplicity="1" />

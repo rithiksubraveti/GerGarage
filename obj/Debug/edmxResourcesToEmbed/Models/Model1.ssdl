@@ -84,6 +84,7 @@
     <Property Name="Rate" Type="decimal" Precision="5" Scale="2" />
     <Property Name="MechanicAssigned" Type="varchar" MaxLength="50" />
     <Property Name="JobStatus" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerMessage" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="ServicesAvailable">
     <Key>

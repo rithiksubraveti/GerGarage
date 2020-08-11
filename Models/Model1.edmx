@@ -89,6 +89,7 @@
           <Property Name="Rate" Type="decimal" Precision="5" Scale="2" />
           <Property Name="MechanicAssigned" Type="varchar" MaxLength="50" />
           <Property Name="JobStatus" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerMessage" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ServicesAvailable">
           <Key>
@@ -288,6 +289,7 @@
           <Property Name="MechanicAssigned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="JobStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CustomerBooking" Relationship="GerGarageDbModel.FK_JobCardDetails_CustomerBooking" FromRole="JobCardDetail" ToRole="CustomerBooking" />
+          <Property Name="CustomerMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_JobCardDetails_CustomerBooking">
           <End Type="GerGarageDbModel.CustomerBooking" Role="CustomerBooking" Multiplicity="1" />
@@ -404,6 +406,7 @@
           <EntitySetMapping Name="JobCardDetails">
             <EntityTypeMapping TypeName="GerGarageDbModel.JobCardDetail">
               <MappingFragment StoreEntitySet="JobCardDetails">
+                <ScalarProperty Name="CustomerMessage" ColumnName="CustomerMessage" />
                 <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
                 <ScalarProperty Name="MechanicAssigned" ColumnName="MechanicAssigned" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />

@@ -13,12 +13,7 @@ namespace GerGarage.Models
         public int BookingId { get; set; }
 
        public DateTime BookingDate { get; set; }
-        /*private DateTime _bookingDate = DateTime.Now;
-        public DateTime BookingDate { 
-            get{ return (_bookingDate == DateTime.Now) ? DateTime.Now : _bookingDate; }
-            set {_bookingDate = value; }
-        }*/
-        public string CustomerName { get; set; }
+       public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
         public string VehicleMake { get; set; }
         public string VehicleModel { get; set; }

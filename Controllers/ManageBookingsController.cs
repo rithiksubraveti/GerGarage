@@ -11,6 +11,7 @@ using Rotativa;
 
 namespace GerGarage.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManageBookingsController : Controller
     {
         private GerGarageDbEntities db = new GerGarageDbEntities();
@@ -18,6 +19,7 @@ namespace GerGarage.Controllers
         // GET: ManageBookings
         public ActionResult Index(string Sorting_Order, string Search_Data)
         {
+            //for filtering records based on few columns
             ViewBag.Jobid = String.IsNullOrEmpty(Sorting_Order) ? "Job_id" : "";
             ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
             ViewBag.SortingStatus = String.IsNullOrEmpty(Sorting_Order) ? "Status_Description" : "";
@@ -70,30 +72,7 @@ namespace GerGarage.Controllers
             return View(jobCardDetail);
         }
 
-        // GET: ManageBookings/Create
-       /* public ActionResult Create()
-        {
-            ViewBag.BookingId = new SelectList(db.CustomerBookings, "BookingId", "CustomerName");
-            return View();
-        }
-
-        // POST: ManageBookings/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "JobNumber,BookingId,ServiceDate,CustomerName,CarMake,CarModel,ServiceType,Rate,MechanicAssigned,JobStatus")] JobCardDetail jobCardDetail)
-        {
-            if (ModelState.IsValid)
-            {
-                db.JobCardDetails.Add(jobCardDetail);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.BookingId = new SelectList(db.CustomerBookings, "BookingId", "CustomerName", jobCardDetail.BookingId);
-            return View(jobCardDetail);
-        }*/
+        
         public List<EmployeeRegistry> GetEmployees()
         {
             GerGarageDbEntities db = new GerGarageDbEntities();
@@ -143,32 +122,7 @@ namespace GerGarage.Controllers
             return View(jobCardDetail);
         }
 
-   /*     // GET: ManageBookings/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            JobCardDetail jobCardDetail = db.JobCardDetails.Find(id);
-            if (jobCardDetail == null)
-            {
-                return HttpNotFound();
-            }
-            return View(jobCardDetail);
-        }
-
-        // POST: ManageBookings/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            JobCardDetail jobCardDetail = db.JobCardDetails.Find(id);
-            db.JobCardDetails.Remove(jobCardDetail);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
-
+   
         protected override void Dispose(bool disposing)
         {
             if (disposing)

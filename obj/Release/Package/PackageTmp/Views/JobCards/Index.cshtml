@@ -1,0 +1,49 @@
+﻿@model IEnumerable<GerGarage.Models.JobCard>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+ 
+            <th>Service Date</th>
+            <th>Customer Name</th>
+            <th>Service Type</th>
+            <th>Rate</th>
+            <th>Mechanic Assigned</th>
+            <th>Status</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+
+            @Html.DisplayFor(modelItem => item.ServiceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MechanicAssigned)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.JobNumber }) |
+           @Html.ActionLink("Generate Invoice","")
+        </td>
+    </tr>
+}
+
+</table>

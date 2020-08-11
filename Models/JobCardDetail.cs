@@ -24,6 +24,7 @@ namespace GerGarage.Models
         public Nullable<decimal> Rate { get; set; }
         public string MechanicAssigned { get; set; }
         public string JobStatus { get; set; }
+        public string CustomerMessage { get; set; }
     
         public virtual CustomerBooking CustomerBooking { get; set; }
     }

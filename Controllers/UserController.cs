@@ -11,7 +11,7 @@ namespace GerGarage.Controllers
 {
     public class UserController : Controller
     {
-        private object form;
+     
 
         public ActionResult Login()
         {
@@ -29,7 +29,7 @@ namespace GerGarage.Controllers
                     return RedirectToAction("Index", "Home");
 
                 }
-                ModelState.AddModelError("", "Invalid Employee Credentials!!!!");
+                ModelState.AddModelError("", "Invalid Credentials!!!!");
             }
             return View();
         }
@@ -86,12 +86,8 @@ namespace GerGarage.Controllers
                 GerGarageDbEntities db = new GerGarageDbEntities();
 
                 ViewBag.VehicleList = new SelectList(db.VehicleMakes, "VehicleBrand", "VehicleBrand");
-                /* ViewBag.VehicleList = VehicleList;*/
-                /*ViewBag.VehicleList = new SelectList(GetVehicleMakes(),"VehicleBrand","VehicleBrand");*/
                 ViewBag.ServiceList = new SelectList(db.ServicesAvailables, "ServiceName", "ServiceName");
-                /*  ViewBag.ServiceList = new SelectList(GetServicesAvailables(), "ServiceName","ServiceName");*/
-            
-            
+                
             return View();
         }
         [HttpPost]
@@ -119,6 +115,7 @@ namespace GerGarage.Controllers
                 booking.ServiceDate = custBooking.ServiceDate;
                 jobCard.ServiceDate = custBooking.ServiceDate;
                 booking.Remarks = custBooking.Remarks;
+                jobCard.CustomerMessage = custBooking.Remarks;
 
                 db.CustomerBookings.Add(booking);
                 db.JobCardDetails.Add(jobCard);
