@@ -99,32 +99,6 @@ namespace GerGarage.Controllers
         {
             using (GerGarageDbEntities db = new GerGarageDbEntities())
             {
-
-
-                /*CustomerBooking booking = new CustomerBooking();
-
-                 JobCardDetail jobCard = new JobCardDetail();
-
-                 jobCard.BookingId = custBooking.BookingId;
-                 booking.BookingDate = custBooking.BookingDate;
-                 booking.CustomerName = custBooking.CustomerName;
-                 jobCard.CustomerName = custBooking.CustomerName;
-                 booking.CustomerEmail = custBooking.CustomerEmail;
-                 booking.VehicleMake = custBooking.VehicleMake;
-                 jobCard.CarMake = custBooking.VehicleMake;
-                 booking.VehicleModel = custBooking.VehicleModel;
-                 jobCard.CarModel = custBooking.VehicleModel;
-                 booking.ServiceType = custBooking.ServiceType;
-                 jobCard.ServiceType = custBooking.ServiceType;
-                 booking.ServiceDate = custBooking.ServiceDate;
-                 jobCard.ServiceDate = custBooking.ServiceDate;
-                 booking.Remarks = custBooking.Remarks;
-                 jobCard.CustomerMessage = custBooking.Remarks;
-
-                 db.CustomerBookings.Add(booking);
-                 db.JobCardDetails.Add(jobCard);*/
-
-
                 CustomersBooking booking = new CustomersBooking();
 
                 JobDetail jobCard = new JobDetail();

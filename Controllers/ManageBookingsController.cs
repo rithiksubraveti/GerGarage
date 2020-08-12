@@ -111,7 +111,7 @@ namespace GerGarage.Controllers
         // POST: ManageBookings/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "JobNumber,BookingId,ServiceDate,CustomerName,CarMake,CarModel,ServiceType,Rate,MechanicAssigned,JobStatus")] JobCardDetail jobCardDetail)
+        public ActionResult Edit([Bind(Include = "JobNumber,BookingId,ServiceDate,CustomerName,CarMake,CarModel,ServiceType,Rate,MechanicAssigned,JobStatus")] JobDetail jobCardDetail)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +119,7 @@ namespace GerGarage.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BookingId = new SelectList(db.CustomerBookings, "BookingId", "CustomerName", jobCardDetail.BookingId);
+            ViewBag.BookingId = new SelectList(db.CustomersBookings, "BookingId", "CustomerName", jobCardDetail.BookingId);
             return View(jobCardDetail);
         }
 

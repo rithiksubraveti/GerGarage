@@ -30,11 +30,9 @@ namespace GerGarage.Models
         public virtual DbSet<EmployeeLogin> EmployeeLogins { get; set; }
         public virtual DbSet<EmployeeRegistry> EmployeeRegistries { get; set; }
         public virtual DbSet<EmployeeRole> EmployeeRoles { get; set; }
-        public virtual DbSet<CustomerBooking> CustomerBookings { get; set; }
         public virtual DbSet<VehicleMake> VehicleMakes { get; set; }
         public virtual DbSet<ServicesAvailable> ServicesAvailables { get; set; }
         public virtual DbSet<BookingStatusTable> BookingStatusTables { get; set; }
-        public virtual DbSet<JobCardDetail> JobCardDetails { get; set; }
         public virtual DbSet<CustomersBooking> CustomersBookings { get; set; }
         public virtual DbSet<JobDetail> JobDetails { get; set; }
     }

@@ -11,12 +11,9 @@
         <EntityTypeShape EntityType="GerGarageDbModel.EmployeeRegistry" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GerGarageDbModel.EmployeeRole" Width="1.5" PointX="3" PointY="5" />
         <AssociationConnector Association="GerGarageDbModel.FK_EmployeeRole_EmployeeRegistry" />
-        <EntityTypeShape EntityType="GerGarageDbModel.CustomerBooking" Width="1.5" PointX="5.375" PointY="3.75" />
         <EntityTypeShape EntityType="GerGarageDbModel.VehicleMake" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="GerGarageDbModel.ServicesAvailable" Width="1.5" PointX="7.375" PointY="3.75" />
         <EntityTypeShape EntityType="GerGarageDbModel.BookingStatusTable" Width="1.5" PointX="1.5" PointY="7.5" />
-        <EntityTypeShape EntityType="GerGarageDbModel.JobCardDetail" Width="1.5" PointX="9.625" PointY="5.625" />
-        <AssociationConnector Association="GerGarageDbModel.FK_JobCardDetails_CustomerBooking" />
         <EntityTypeShape EntityType="GerGarageDbModel.CustomersBooking" Width="1.5" PointX="9.375" PointY="1.125" />
         <EntityTypeShape EntityType="GerGarageDbModel.JobDetail" Width="1.5" PointX="11.625" PointY="1" />
         <AssociationConnector Association="GerGarageDbModel.FK_JobDetails_CustomersBooking" />
