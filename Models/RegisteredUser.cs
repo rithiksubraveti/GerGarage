@@ -10,6 +10,7 @@ namespace GerGarage.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Applied date is required")]
         public string CustomerFirstName { get; set; }
         public string CustomerLastName { get; set; }
         public long CustomerContact { get; set; }

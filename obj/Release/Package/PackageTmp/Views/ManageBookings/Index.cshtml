@@ -21,6 +21,7 @@
         <th>Rate</th>
         <th>Mechanic Assigned</th>
         <th> @Html.ActionLink("Status", "Index", new { Sorting_Order = ViewBag.SortingStatus })</th>
+        <th>Customer Message</th>
     </tr>
             
 
@@ -53,6 +54,10 @@
     <td>
         @Html.DisplayFor(modelItem => item.JobStatus)
     </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CustomerMessage)
+    </td>
+
 
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.JobNumber }) |

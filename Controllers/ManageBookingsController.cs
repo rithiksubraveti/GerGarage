@@ -25,7 +25,8 @@ namespace GerGarage.Controllers
             ViewBag.SortingStatus = String.IsNullOrEmpty(Sorting_Order) ? "Status_Description" : "";
             ViewBag.CarModel = String.IsNullOrEmpty(Sorting_Order) ? "Car_Model" : "";
             ViewBag.SortingDate = Sorting_Order == "Service_Date" ? "Date_Description" : "Date";
-            var jobCardDetails = from jd in db.JobCardDetails select jd;
+            //var jobCardDetails = from jd in db.JobCardDetails select jd;
+            var jobCardDetails = from jd in db.JobDetails select jd;
             {
                 if (!String.IsNullOrEmpty(Search_Data))
                 {
@@ -64,7 +65,7 @@ namespace GerGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobCardDetail jobCardDetail = db.JobCardDetails.Find(id);
+            JobDetail jobCardDetail = db.JobDetails.Find(id);
             if (jobCardDetail == null)
             {
                 return HttpNotFound();
@@ -98,12 +99,12 @@ namespace GerGarage.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobCardDetail jobCardDetail = db.JobCardDetails.Find(id);
+            JobDetail jobCardDetail = db.JobDetails.Find(id);
             if (jobCardDetail == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BookingId = new SelectList(db.CustomerBookings, "BookingId", "CustomerName", jobCardDetail.BookingId);
+            ViewBag.BookingId = new SelectList(db.CustomersBookings, "BookingId", "CustomerName", jobCardDetail.BookingId);
             return View(jobCardDetail);
         }
 
@@ -135,7 +136,7 @@ namespace GerGarage.Controllers
         {
             using (GerGarageDbEntities db = new GerGarageDbEntities())
             {
-                JobCardDetail jd = db.JobCardDetails.FirstOrDefault(c => c.JobNumber == id);
+                JobDetail jd = db.JobDetails.FirstOrDefault(c => c.JobNumber == id);
 
                 var report = new PartialViewAsPdf("~/Views/Shared/Invoice.cshtml", jd);
                 return report;

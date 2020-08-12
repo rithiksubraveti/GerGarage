@@ -48,18 +48,23 @@ namespace GerGarage.Controllers
                 emp.EmployeeContact = regEmp.EmployeeContact;
                 emp.EmployeeEmailId = regEmp.EmployeeEmailId;
                 emp.EmployeePassword = regEmp.EmployeePassword;
-                db.EmployeeRegistries.Add(emp);
-                db.SaveChanges();
+
 
                 EmployeeLogin logEmp = new EmployeeLogin();
                 logEmp.EmployeeEmailId = regEmp.EmployeeEmailId;
                 logEmp.EmployeePassword = regEmp.EmployeePassword;
-                db.EmployeeLogins.Add(logEmp);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.EmployeeRegistries.Add(emp);
+                    db.EmployeeLogins.Add(logEmp);
+                    db.SaveChanges();
 
 
-            } 
-            return RedirectToAction("Login");
+
+                    return RedirectToAction("Login");
+                }
+                return View();
+            }
 
         }
         public ActionResult Logout()

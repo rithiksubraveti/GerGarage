@@ -17,6 +17,9 @@
         <EntityTypeShape EntityType="GerGarageDbModel.BookingStatusTable" Width="1.5" PointX="1.5" PointY="7.5" />
         <EntityTypeShape EntityType="GerGarageDbModel.JobCardDetail" Width="1.5" PointX="9.625" PointY="5.625" />
         <AssociationConnector Association="GerGarageDbModel.FK_JobCardDetails_CustomerBooking" />
+        <EntityTypeShape EntityType="GerGarageDbModel.CustomersBooking" Width="1.5" PointX="9.375" PointY="1.125" />
+        <EntityTypeShape EntityType="GerGarageDbModel.JobDetail" Width="1.5" PointX="11.625" PointY="1" />
+        <AssociationConnector Association="GerGarageDbModel.FK_JobDetails_CustomersBooking" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

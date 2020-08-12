@@ -17,6 +17,8 @@ namespace GerGarage.Models
         public string CustomerEmail { get; set; }
         public string VehicleMake { get; set; }
         public string VehicleModel { get; set; }
+        public string VehicleNumber { get; set; }
+        public string VehicleFuelType { get; set; }
         public string ServiceType { get; set; }
         public DateTime ServiceDate { get; set; }
         public string Remarks { get; set; }

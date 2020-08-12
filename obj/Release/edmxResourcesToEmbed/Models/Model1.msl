@@ -98,6 +98,7 @@
     <EntitySetMapping Name="JobCardDetails">
       <EntityTypeMapping TypeName="GerGarageDbModel.JobCardDetail">
         <MappingFragment StoreEntitySet="JobCardDetails">
+          <ScalarProperty Name="CustomerMessage" ColumnName="CustomerMessage" />
           <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
           <ScalarProperty Name="MechanicAssigned" ColumnName="MechanicAssigned" />
           <ScalarProperty Name="Rate" ColumnName="Rate" />

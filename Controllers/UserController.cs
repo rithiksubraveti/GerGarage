@@ -52,16 +52,20 @@ namespace GerGarage.Controllers
                 user.CustomerAddress = regUser.CustomerAddress;
                 user.CustomerPostalCode = regUser.CustomerPostalCode;
 
-                db.CustomerRegistries.Add(user);
-                db.SaveChanges();
-
                 CustomerLogin logUser = new CustomerLogin();
                 logUser.CustomerEmailId = regUser.CustomerEmailId;
                 logUser.CustomerPassword = regUser.CustomerPassword;
-                db.CustomerLogins.Add(logUser);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    db.CustomerRegistries.Add(user);
+                    db.CustomerLogins.Add(logUser);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Login");
+                }
+                return View();
+
             }
-            return RedirectToAction("Login");
 
         }
         /*The following code is to fetch data from the Vehicle Type DB and populate them in the Drop Down List*/
@@ -97,9 +101,33 @@ namespace GerGarage.Controllers
             {
 
 
-                CustomerBooking booking = new CustomerBooking();
+                /*CustomerBooking booking = new CustomerBooking();
 
-                JobCardDetail jobCard = new JobCardDetail();
+                 JobCardDetail jobCard = new JobCardDetail();
+
+                 jobCard.BookingId = custBooking.BookingId;
+                 booking.BookingDate = custBooking.BookingDate;
+                 booking.CustomerName = custBooking.CustomerName;
+                 jobCard.CustomerName = custBooking.CustomerName;
+                 booking.CustomerEmail = custBooking.CustomerEmail;
+                 booking.VehicleMake = custBooking.VehicleMake;
+                 jobCard.CarMake = custBooking.VehicleMake;
+                 booking.VehicleModel = custBooking.VehicleModel;
+                 jobCard.CarModel = custBooking.VehicleModel;
+                 booking.ServiceType = custBooking.ServiceType;
+                 jobCard.ServiceType = custBooking.ServiceType;
+                 booking.ServiceDate = custBooking.ServiceDate;
+                 jobCard.ServiceDate = custBooking.ServiceDate;
+                 booking.Remarks = custBooking.Remarks;
+                 jobCard.CustomerMessage = custBooking.Remarks;
+
+                 db.CustomerBookings.Add(booking);
+                 db.JobCardDetails.Add(jobCard);*/
+
+
+                CustomersBooking booking = new CustomersBooking();
+
+                JobDetail jobCard = new JobDetail();
 
                 jobCard.BookingId = custBooking.BookingId;
                 booking.BookingDate = custBooking.BookingDate;
@@ -110,6 +138,9 @@ namespace GerGarage.Controllers
                 jobCard.CarMake = custBooking.VehicleMake;
                 booking.VehicleModel = custBooking.VehicleModel;
                 jobCard.CarModel = custBooking.VehicleModel;
+                booking.VehicleNumber = custBooking.VehicleNumber;
+                jobCard.CarNumber = custBooking.VehicleNumber;
+                booking.VehicleFuelType = custBooking.VehicleFuelType;
                 booking.ServiceType = custBooking.ServiceType;
                 jobCard.ServiceType = custBooking.ServiceType;
                 booking.ServiceDate = custBooking.ServiceDate;
@@ -117,8 +148,8 @@ namespace GerGarage.Controllers
                 booking.Remarks = custBooking.Remarks;
                 jobCard.CustomerMessage = custBooking.Remarks;
 
-                db.CustomerBookings.Add(booking);
-                db.JobCardDetails.Add(jobCard);
+                db.CustomersBookings.Add(booking);
+                db.JobDetails.Add(jobCard);
                 db.SaveChanges();
             }
 

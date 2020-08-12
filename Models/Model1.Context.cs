@@ -35,5 +35,7 @@ namespace GerGarage.Models
         public virtual DbSet<ServicesAvailable> ServicesAvailables { get; set; }
         public virtual DbSet<BookingStatusTable> BookingStatusTables { get; set; }
         public virtual DbSet<JobCardDetail> JobCardDetails { get; set; }
+        public virtual DbSet<CustomersBooking> CustomersBookings { get; set; }
+        public virtual DbSet<JobDetail> JobDetails { get; set; }
     }
 }
