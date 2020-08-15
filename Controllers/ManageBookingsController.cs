@@ -25,7 +25,7 @@ namespace GerGarage.Controllers
             ViewBag.SortingStatus = String.IsNullOrEmpty(Sorting_Order) ? "Status_Description" : "";
             ViewBag.CarModel = String.IsNullOrEmpty(Sorting_Order) ? "Car_Model" : "";
             ViewBag.SortingDate = Sorting_Order == "Service_Date" ? "Date_Description" : "Date";
-            //var jobCardDetails = from jd in db.JobCardDetails select jd;
+       
             var jobCardDetails = from jd in db.JobDetails select jd;
             {
                 if (!String.IsNullOrEmpty(Search_Data))

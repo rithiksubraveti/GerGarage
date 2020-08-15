@@ -45,8 +45,7 @@ namespace GerGarage.Controllers
         }
 
         // POST: EmployeesList/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,EmployeeFirstName,EmployeeLastName,EmployeeContact,EmployeeEmailId,EmployeePassword")] EmployeeRegistry employeeRegistry)
@@ -77,8 +76,7 @@ namespace GerGarage.Controllers
         }
 
         // POST: EmployeesList/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,EmployeeFirstName,EmployeeLastName,EmployeeContact,EmployeeEmailId,EmployeePassword")] EmployeeRegistry employeeRegistry)

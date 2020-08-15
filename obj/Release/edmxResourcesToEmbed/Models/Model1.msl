@@ -54,21 +54,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CustomerBookings">
-      <EntityTypeMapping TypeName="GerGarageDbModel.CustomerBooking">
-        <MappingFragment StoreEntitySet="CustomerBooking">
-          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-          <ScalarProperty Name="ServiceDate" ColumnName="ServiceDate" />
-          <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
-          <ScalarProperty Name="VehicleModel" ColumnName="VehicleModel" />
-          <ScalarProperty Name="VehicleMake" ColumnName="VehicleMake" />
-          <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
-          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
-          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="VehicleMakes">
       <EntityTypeMapping TypeName="GerGarageDbModel.VehicleMake">
         <MappingFragment StoreEntitySet="VehicleMake">
@@ -95,14 +80,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="JobCardDetails">
-      <EntityTypeMapping TypeName="GerGarageDbModel.JobCardDetail">
-        <MappingFragment StoreEntitySet="JobCardDetails">
-          <ScalarProperty Name="CustomerMessage" ColumnName="CustomerMessage" />
+    <EntitySetMapping Name="CustomersBookings">
+      <EntityTypeMapping TypeName="GerGarageDbModel.CustomersBooking">
+        <MappingFragment StoreEntitySet="CustomersBooking">
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="ServiceDate" ColumnName="ServiceDate" />
+          <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+          <ScalarProperty Name="VehicleFuelType" ColumnName="VehicleFuelType" />
+          <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+          <ScalarProperty Name="VehicleModel" ColumnName="VehicleModel" />
+          <ScalarProperty Name="VehicleMake" ColumnName="VehicleMake" />
+          <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobDetails">
+      <EntityTypeMapping TypeName="GerGarageDbModel.JobDetail">
+        <MappingFragment StoreEntitySet="JobDetails">
           <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
           <ScalarProperty Name="MechanicAssigned" ColumnName="MechanicAssigned" />
           <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="CustomerMessage" ColumnName="CustomerMessage" />
           <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+          <ScalarProperty Name="CarNumber" ColumnName="CarNumber" />
           <ScalarProperty Name="CarModel" ColumnName="CarModel" />
           <ScalarProperty Name="CarMake" ColumnName="CarMake" />
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />

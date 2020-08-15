@@ -128,7 +128,7 @@ namespace GerGarage.Controllers
             }
 
             ViewData["Confirmed"] = "Your Booking was succesfull";
-            return RedirectToAction("Booking");
+            return RedirectToAction("Home,Index");
         
     }
 

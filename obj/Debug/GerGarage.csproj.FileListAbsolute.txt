@@ -86,3 +86,4 @@ E:\Final Project Test Folder\GerGarage\GerGarage\bin\System.Net.Http.Formatting.
 E:\Final Project Test Folder\GerGarage\GerGarage\bin\System.Web.Http.xml
 E:\Final Project Test Folder\GerGarage\GerGarage\bin\System.Web.Http.WebHost.xml
 E:\Final Project Test Folder\GerGarage\GerGarage\bin\Rotativa.dll
+E:\Final Project Test Folder\GerGarage\GerGarage\obj\Debug\GerGarage.csprojAssemblyReference.cache

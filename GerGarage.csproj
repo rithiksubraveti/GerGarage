@@ -282,10 +282,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="App_Browsers\qt.browser" />
-    <Content Include="ClassDiagram1.cd" />
-    <None Include="Properties\PublishProfiles\gergarage - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\gergarage - ReadOnly - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\gergarage - Web Deploy.pubxml" />
+    <Content Include="ClassDiagram2.cd" />
+    <Content Include="ClassDiagram3.cd" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -331,6 +329,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

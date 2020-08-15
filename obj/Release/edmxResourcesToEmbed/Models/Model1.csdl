@@ -51,14 +51,14 @@
       <End Role="EmployeeRegistry" EntitySet="EmployeeRegistries" />
       <End Role="EmployeeRole" EntitySet="EmployeeRoles" />
     </AssociationSet>
-    <EntitySet Name="CustomerBookings" EntityType="GerGarageDbModel.CustomerBooking" />
     <EntitySet Name="VehicleMakes" EntityType="GerGarageDbModel.VehicleMake" />
     <EntitySet Name="ServicesAvailables" EntityType="GerGarageDbModel.ServicesAvailable" />
     <EntitySet Name="BookingStatusTables" EntityType="GerGarageDbModel.BookingStatusTable" />
-    <EntitySet Name="JobCardDetails" EntityType="GerGarageDbModel.JobCardDetail" />
-    <AssociationSet Name="FK_JobCardDetails_CustomerBooking" Association="GerGarageDbModel.FK_JobCardDetails_CustomerBooking">
-      <End Role="CustomerBooking" EntitySet="CustomerBookings" />
-      <End Role="JobCardDetail" EntitySet="JobCardDetails" />
+    <EntitySet Name="CustomersBookings" EntityType="GerGarageDbModel.CustomersBooking" />
+    <EntitySet Name="JobDetails" EntityType="GerGarageDbModel.JobDetail" />
+    <AssociationSet Name="FK_JobDetails_CustomersBooking" Association="GerGarageDbModel.FK_JobDetails_CustomersBooking">
+      <End Role="CustomersBooking" EntitySet="CustomersBookings" />
+      <End Role="JobDetail" EntitySet="JobDetails" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="EmployeeRole">
@@ -82,21 +82,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="CustomerBooking">
-    <Key>
-      <PropertyRef Name="BookingId" />
-    </Key>
-    <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CustomerEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="VehicleMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="VehicleModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ServiceDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="JobCardDetails" Relationship="GerGarageDbModel.FK_JobCardDetails_CustomerBooking" FromRole="CustomerBooking" ToRole="JobCardDetail" />
-  </EntityType>
   <EntityType Name="VehicleMake">
     <Key>
       <PropertyRef Name="Id" />
@@ -120,7 +105,24 @@
     <Property Name="BookingStatus" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="JobCardDetail">
+  <EntityType Name="CustomersBooking">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VehicleMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VehicleModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VehicleNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="VehicleFuelType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ServiceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="JobDetails" Relationship="GerGarageDbModel.FK_JobDetails_CustomersBooking" FromRole="CustomersBooking" ToRole="JobDetail" />
+  </EntityType>
+  <EntityType Name="JobDetail">
     <Key>
       <PropertyRef Name="JobNumber" />
     </Key>
@@ -130,21 +132,22 @@
     <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CarNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="ServiceType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerMessage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Rate" Type="Decimal" Precision="5" Scale="2" />
     <Property Name="MechanicAssigned" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="JobStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="CustomerBooking" Relationship="GerGarageDbModel.FK_JobCardDetails_CustomerBooking" FromRole="JobCardDetail" ToRole="CustomerBooking" />
-    <Property Name="CustomerMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CustomersBooking" Relationship="GerGarageDbModel.FK_JobDetails_CustomersBooking" FromRole="JobDetail" ToRole="CustomersBooking" />
   </EntityType>
-  <Association Name="FK_JobCardDetails_CustomerBooking">
-    <End Type="GerGarageDbModel.CustomerBooking" Role="CustomerBooking" Multiplicity="1" />
-    <End Type="GerGarageDbModel.JobCardDetail" Role="JobCardDetail" Multiplicity="*" />
+  <Association Name="FK_JobDetails_CustomersBooking">
+    <End Type="GerGarageDbModel.CustomersBooking" Role="CustomersBooking" Multiplicity="1" />
+    <End Type="GerGarageDbModel.JobDetail" Role="JobDetail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CustomerBooking">
+      <Principal Role="CustomersBooking">
         <PropertyRef Name="BookingId" />
       </Principal>
-      <Dependent Role="JobCardDetail">
+      <Dependent Role="JobDetail">
         <PropertyRef Name="BookingId" />
       </Dependent>
     </ReferentialConstraint>

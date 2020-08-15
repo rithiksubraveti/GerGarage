@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GerGarage.Models.JobCardDetail>
+﻿@model IEnumerable<GerGarage.Models.JobDetail>
 
 @{
     ViewBag.Title = "Index";
@@ -17,11 +17,13 @@
         <th> @Html.ActionLink("Customer Name", "Index", new { Sorting_Order = ViewBag.SortingName })</th>
         <th> @Html.ActionLink("Car Brand", "Index", new { Sorting_Order = ViewBag.CarModel })</th>
         <th>Car Model</th>
+        <th>Car Number</th>
         <th>Service Type</th>
+        <th>Customer Message</th>
         <th>Rate</th>
         <th>Mechanic Assigned</th>
         <th> @Html.ActionLink("Status", "Index", new { Sorting_Order = ViewBag.SortingStatus })</th>
-        <th>Customer Message</th>
+
     </tr>
             
 
@@ -43,7 +45,13 @@
         @Html.DisplayFor(modelItem => item.CarModel)
     </td>
     <td>
+        @Html.DisplayFor(modelItem => item.CarNumber)
+    </td>
+    <td>
         @Html.DisplayFor(modelItem => item.ServiceType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CustomerMessage)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Rate)
@@ -54,9 +62,7 @@
     <td>
         @Html.DisplayFor(modelItem => item.JobStatus)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CustomerMessage)
-    </td>
+
 
 
     <td>
